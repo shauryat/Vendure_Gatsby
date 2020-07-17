@@ -2,7 +2,7 @@ import { faMinus, faPlus, faShoppingBag } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { gql } from 'apollo-boost';
 import React, { useState } from 'react';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/client';
 
 import { formatPrice } from '../../utilities/utilities';
 

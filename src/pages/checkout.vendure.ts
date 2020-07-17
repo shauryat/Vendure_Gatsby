@@ -1,4 +1,4 @@
-import { gql } from "apollo-boost";
+import { gql } from '@apollo/client';
 
 import { ORDER_FRAGMENT } from "../components/ShoppingCart/ShoppingCart.vendure";
 
@@ -64,4 +64,39 @@ export const ADD_PAYMENT_TO_ORDER = gql`
   }
   ${ORDER_FRAGMENT}
 `;
+
+export const ACTIVE_CUSTOMER_AND_CUSTOMER = gql `
+{
+  activeCustomer{
+    emailAddress
+    id
+    orders(options:{take:1,sort:{id:DESC}})
+    {
+      items{
+        id
+    code
+    state
+    total
+    active
+    currencyCode
+    lines {
+      id
+      productVariant {
+        id
+        name
+        currencyCode
+      }
+      unitPriceWithTax
+      quantity
+      totalPrice
+      featuredAsset {
+        id
+        preview
+      }
+    }      
+      }
+    }
+  }
+}
+`
 

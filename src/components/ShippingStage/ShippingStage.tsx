@@ -1,6 +1,6 @@
 import { Formik } from 'formik';
 import React from 'react';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/client';
 
 import { OrderAddress } from '../../../vendure-types';
 import {

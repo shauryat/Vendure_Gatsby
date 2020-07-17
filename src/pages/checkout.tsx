@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from '@apollo/react-hooks';
-
+import { useQuery } from '@apollo/client';
+import { ACTIVE_CUSTOMER_AND_CUSTOMER } from './checkout.vendure';
 import { ConfirmationStage } from '../components/ConfirmationStage/ConfirmationStage';
 import Layout from '../components/layout';
 import { PaymentStage } from '../components/PaymentStage/PaymentStage';
@@ -16,26 +16,37 @@ function useProgress(initialStage = 0) {
   return {
     currentStage,
     setStage,
-    nextStage: () => currentStage < 2 && setStage(currentStage + 1),
+    nextStage: () => currentStage < 3 && setStage(currentStage + 1),
     prevStage: () => currentStage > 0 && setStage(currentStage - 1),
   };
 }
 
 const CheckoutPage = () => {
-  const { data: ProcessindData , error: ProcessError, loading: ProcessLoading } = useQuery(GET_ACTIVE_ORDER);
+  const { data: LastData , error: LastError, loading: LastLoading } = useQuery(ACTIVE_CUSTOMER_AND_CUSTOMER);
+  const { data, error: ProcessError, loading: ProcessLoading } = useQuery(GET_ACTIVE_ORDER);
   const { currentStage, setStage, nextStage, prevStage } = useProgress();
   useEffect(() => {
-    if (ProcessindData.activeOrder && ProcessindData.activeOrder.state === 'ArrangingPayment') {
-      setStage(1);
+  
+    { LastData && LastData.activeCustomer ? setStage(1) : setStage(0)}
+    
+    if (data.activeOrder && data.activeOrder.state === 'ArrangingPayment') {
+      setStage(2);
     }
-  }, [ProcessindData]);
+  }, [LastData,data]);
   if (ProcessLoading) {
     return <div>Loading...</div>;
   }
   if (ProcessError) {
     return <div>Error! {ProcessError ? ProcessError.message : 'No active order'}</div>;
   }
+  if (LastLoading) {
+    return <div>Loading...</div>;
+  }
+  if (LastError) {
+    return <div>Error! {LastError ? LastError.message : 'No active order duh'}</div>;
+  }
   const stages = [
+    { name: 'Sign in', render: () => <SignInStage nextStage={nextStage} /> },
     { name: 'Shipping', render: () => <ShippingStage nextStage={nextStage} /> },
     {
       name: 'Payment',
@@ -67,7 +78,7 @@ const CheckoutPage = () => {
             </ol>
           </div>
           {stages[currentStage].render()}
-        </div>
+         </div>
       </div>
     </Layout>
   );

@@ -1,6 +1,6 @@
 import { Formik } from 'formik';
 import React from 'react';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/client';
 import * as Yup from 'yup';
 import { navigate, Link } from "gatsby"
 

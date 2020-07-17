@@ -1,6 +1,6 @@
 import { Formik } from 'formik';
 import React from 'react';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 
 import { ADD_PAYMENT_TO_ORDER } from '../../pages/checkout.vendure';
 

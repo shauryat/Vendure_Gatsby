@@ -1,4 +1,4 @@
-import { gql } from "apollo-boost";
+import { gql } from '@apollo/client';
 
 export const ORDER_FRAGMENT = gql`
   fragment ActiveOrder on Order {

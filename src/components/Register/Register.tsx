@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import {REGISTER_CUSTOMER} from './Register.vendure';
 import { Formik } from 'formik';
 import { Link } from "gatsby"

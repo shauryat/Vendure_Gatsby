@@ -5,9 +5,11 @@
  */
 
 // You can delete this file if you're not using it
-import { ApolloProvider } from '@apollo/react-hooks';
-import ApolloClient, { InMemoryCache } from 'apollo-boost';
+import { ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 import React from 'react';
+import { gql } from '@apollo/client';
+import "./src/styles/site.css"
 
 const cache = new InMemoryCache();
 const client = new ApolloClient({
@@ -17,7 +19,12 @@ const client = new ApolloClient({
   resolvers: {
     Mutation: {
       setActiveOrderId: (_, { id }, { cache: apolloCache }) => {
-        apolloCache.writeData({
+        apolloCache.writeQuery({
+          query: gql`
+   mutation SetActiveOrderId($id: String!) {
+    setActiveOrderId(id: $id) 
+  }
+  `,
           data: {
             activeOrderId: id,
           },
@@ -27,7 +34,12 @@ const client = new ApolloClient({
   },
 });
 
-cache.writeData({
+cache.writeQuery({
+  query: gql`
+  {
+    activeOrderId 
+  }
+`,
   data: {
     activeOrderId: null,
   },

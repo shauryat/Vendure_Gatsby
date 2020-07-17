@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { ALL_ORDER_LIST } from './OrderList.vendure';
 import OrderListComponent from './OrderListComponent';
 

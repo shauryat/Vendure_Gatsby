@@ -1,7 +1,7 @@
 import { gql } from 'apollo-boost';
 import { graphql } from 'gatsby';
 import React, { useState } from 'react';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/client';
 
 import Layout from '../components/layout';
 import { GET_ACTIVE_ORDER } from "../components/ShoppingCart/ShoppingCart.vendure";

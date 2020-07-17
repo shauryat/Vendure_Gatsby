@@ -5,7 +5,7 @@ export const CollectionCard = ({collection}) => {
     return (
         <div>
         <Link to={'/collections/' + collection.slug}>   
-         <p>{collection.name}</p> 
+         <p className='text-lg'>{collection.name}</p> 
          </Link>
         </div>
     )

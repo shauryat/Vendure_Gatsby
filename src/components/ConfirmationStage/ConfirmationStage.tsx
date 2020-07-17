@@ -1,6 +1,6 @@
 import React from 'react';
 import { DISPLAY_ORDER } from './confirmation.vendure';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { CartContentsList } from '../ShoppingCart/ShoppingCart'
 
 export const ConfirmationStage = ({ nextStage }) => 
