@@ -11,7 +11,7 @@ export function ProductCard({ product }: { product: any }) {
       <div className='card-image'>
         <figure className='image is-4by3'>
           <img
-            src={product.productPreview + '?w=300&h=200&mode=crop'}
+            src={product.productAsset.preview + '?w=300&h=200&mode=crop'}
             alt='Placeholder image'
           />
         </figure>

@@ -37,7 +37,9 @@ export const PRODUCT_QUERY = graphql`
               value
             }
           }
-          productPreview
+          productAsset {
+        preview
+      }
         }
       }
 

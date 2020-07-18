@@ -1,8 +1,10 @@
 import { faMinus, faPlus, faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { gql } from 'apollo-boost';
 import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
+
+import { IconButton , Badge} from '@material-ui/core';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import { formatPrice } from '../../utilities/utilities';
 
@@ -22,15 +24,16 @@ export function ShoppingCart() {
   }
   return (
       <>
-        <button className={'button is-primary ' + styles.cartButton} onClick={() => setOpened(true)}>
-          <FontAwesomeIcon icon={faShoppingBag} pull="left" />
-          {data.activeOrder === null
+        <IconButton color="inherit" onClick={() => setOpened(true)}>
+          <Badge badgeContent={data.activeOrder === null
               ? 0: data.activeOrder.lines.reduce(
                   (total, line) => total + line.quantity,
                   0,
               )
-              }
-        </button>
+              }>
+                <ShoppingCartIcon/>
+          </Badge>
+        </IconButton>
         <div
             className={[styles.cartTray, opened && styles.opened]
                 .filter(Boolean)

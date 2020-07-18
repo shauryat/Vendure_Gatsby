@@ -1,48 +1,30 @@
 import React from 'react';
-import { useLazyQuery } from '@apollo/client';
-import { SEARCH_BAR_QUERY } from './SearchBar.vendure';
-import { Formik } from 'formik';
-import { ProductCard } from '../ProductCard/ProductCard';
+import { Formik,Field  } from 'formik';
+import { navigate } from 'gatsby';
+import { TextField } from '@material-ui/core';
 
 const SearchBarComponent = () => {
-    const [searchPull, { loading, data}] = useLazyQuery(SEARCH_BAR_QUERY)
-
-    if (loading ) return <p> loading... </p>
+    
     return (
         <div>
             <Formik 
-            initialValues={
-                { term:'', groupByProduct:true}
-            }
-
-            onSubmit={({term,groupByProduct}) => 
-        {
-            searchPull({
-                variables: {
-                    input:{ term, groupByProduct}
-                }
-            })
-        }}>
+            initialValues={{ term:''}}
+             onSubmit={({term}) => {navigate( "/SearchPage", { state:{ term } })}} >
              {({
           values,
           handleChange,
           handleBlur,
           handleSubmit,
-          handleReset,
             /* and other goodies */
-        }) => ( 
-<form onSubmit={handleSubmit}>
+        }) => (  <form onSubmit={handleSubmit}>
 
-<div className="field">
-  <label className="label">Search</label>
+    <div className="field">
   <div className="control">
-    <input
-      className="input"
+    <Field
       type="text"
-      onChange={handleChange}
-      onBlur={handleBlur}
       name="term"
-      value={values.term}
+      label="Search"
+      component={TextField}
     />
   </div>
 </div>
@@ -54,7 +36,6 @@ const SearchBarComponent = () => {
 </form>
         )}
         </Formik>
-        { data ? data.search.items.map(item => <ProductCard product={item} key={item.productId}/>): <p>no results </p> }
         </div>
     );
 };

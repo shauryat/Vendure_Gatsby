@@ -1,6 +1,8 @@
 import { graphql, StaticQuery } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { CssBaseline } from '@material-ui/core';
+
 
 import Header from './header';
 import './style.scss';
@@ -11,21 +13,12 @@ import './style.scss';
  *
  * See: https://www.gatsbyjs.org/docs/static-query/
  */
-const Layout = ({ children }) => (
+const Layout = ({ children }) => {
 
-    <StaticQuery
-        query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-        render={data => (
+return (        
             <>
-              <Header siteTitle={data.site.siteMetadata.title} />
+            <CssBaseline/>
+              <Header/>
               <div
                   style={{
                     margin: `0 auto`,
@@ -42,10 +35,8 @@ const Layout = ({ children }) => (
                 </footer>
               </div>
             </>
-        )}
-    />
-);
-
+  )
+ }
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 };
