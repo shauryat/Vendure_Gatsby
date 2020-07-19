@@ -3,10 +3,30 @@ import { useQuery, useMutation } from '@apollo/client';
 import { ACTIVE_CUSTOMER_INFO, LOGOUT_CUSTOMER } from './Customer.vendure';
 import { Link } from "gatsby"
 import {Typography, Button} from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { IconButton } from '@material-ui/core';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
+const useStyles = makeStyles((theme:Theme) =>
+createStyles({
+    avatarBg:{
+        backgroundColor:theme.palette.secondary.main,
+        color:theme.palette.primary.main,
+        marginLeft:4
+    }
+})
+
+)
+
+
+
+function FirstLetter(str) {
+    return str.charAt(1).toUpperCase();
+  }
 
 const CustomerDisplayInfo = () => {
-    const [LogoutUser] = useMutation(LOGOUT_CUSTOMER);
+    const classes = useStyles()
     const { data, loading, error } = useQuery(ACTIVE_CUSTOMER_INFO, {pollInterval: 500})
     if (loading) 
     return <div>Loading </div>
@@ -18,8 +38,8 @@ const CustomerDisplayInfo = () => {
         <div>
      { data.activeCustomer ?  (
          <div> 
-    <Typography>{data.activeCustomer.emailAddress}</Typography> <Button color='primary' variant="contained" onClick={ () => LogoutUser() }> Logout</Button>
-    </div>   ) :  <Link className="button is-primary" to="/LoginPage">Login</Link>
+    <Avatar className={classes.avatarBg}>{FirstLetter(JSON.stringify(data.activeCustomer.firstName))}</Avatar>
+    </div>   ) :  <Link to="/LoginPage"><IconButton color='secondary'><AccountCircleIcon/></IconButton></Link>
              
      }
         </div>

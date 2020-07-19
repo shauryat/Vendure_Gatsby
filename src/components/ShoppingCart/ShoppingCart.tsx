@@ -25,7 +25,7 @@ export function ShoppingCart() {
   return (
       <>
         <IconButton color="inherit" onClick={() => setOpened(true)}>
-          <Badge badgeContent={data.activeOrder === null
+          <Badge color='secondary' badgeContent={data.activeOrder === null
               ? 0: data.activeOrder.lines.reduce(
                   (total, line) => total + line.quantity,
                   0,

@@ -9,6 +9,8 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import CustomerDisplayInfo from './Customer/CustomerComponent';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,6 +23,9 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       flexGrow: 1,
     },
+    appbar:{
+      boxShadow:'none'
+    }
   }),
 );
 
@@ -54,19 +59,25 @@ const Header = (props) => {
   const classes = useStyles();
 
   return (
+    <React.Fragment>
      <div className={classes.root}>
-      <AppBar position="static">
+     <ElevationScroll {...props}>
+      <AppBar>
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            News
-          </Typography>
-          <Button color="inherit">Login</Button>
+        <div style={{flexGrow:1}} >
+          <Link to="/">
+               <div className='text-white text-xs md:text-lg leading-none font-semibold'> VENDURE </div>
+               <div className='text-xs text-white' > STORE </div>
+               </Link>
+            </div>
+            <CustomerDisplayInfo/>
+            <SearchBarComponent/>
+         <ShoppingCart/>
         </Toolbar>
       </AppBar>
+      </ElevationScroll>
       </div>
+      </React.Fragment>
   )
 };
 

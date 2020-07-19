@@ -7,14 +7,15 @@ import {CollectionCard} from '../components/Collections/CollectionCard';
 
 import styles from './home.module.scss';
 import SearchBarComponent from '../components/SearchBar/SearchBar.component';
+import LandingComponent from '../components/Landing/Landing.component';
 
 const IndexPage = ({ data }) => (
   <Layout>
     <SEO title='Home' keywords={[`gatsby`, `application`, `react`]} />
+    <LandingComponent/>
     <section>
       { data.vendure.collections.items.filter((collection:any) => collection.parent && collection.parent.name === '__root_collection__')
       .map(item => <CollectionCard collection={item} key={item.id} />) }
-      <SearchBarComponent/>
     </section>
   </Layout>
 );
