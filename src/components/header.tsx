@@ -62,7 +62,7 @@ const Header = (props) => {
     <React.Fragment>
      <div className={classes.root}>
      <ElevationScroll {...props}>
-      <AppBar>
+      <AppBar position='fixed'>
         <Toolbar>
         <div style={{flexGrow:1}} >
           <Link to="/">

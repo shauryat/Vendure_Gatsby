@@ -19,9 +19,7 @@ const Layout = ({ children }) => {
 return (        
             <>
             <ThemeProvider theme={theme}>
-            <CssBaseline/>
-              <Header/>
-             
+            <Header/>
                 <main>{children}</main>
                 <footer>
                   © {new Date().getFullYear()}, Built with

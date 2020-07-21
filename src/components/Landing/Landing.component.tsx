@@ -13,6 +13,7 @@ createStyles({
     },
     chip : {
         marginRight:5,
+        marginBottom:5,
         color:theme.palette.primary.main
     }
 })
@@ -22,7 +23,7 @@ createStyles({
 const LandingComponent = () => {
     const classes = useStyles()
     return (
-        <div className='w-full bg-facebookBlue'>
+        <div className='bg-facebookBlue mt-4 rounded-lg'>
         <div style={{height:'290' , width:'100%'}}>
              <Grid container spacing={3}>
              <Grid item xs={12} md={7}>
@@ -42,7 +43,7 @@ const LandingComponent = () => {
                  </Grid>
                  <Grid item xs={12} md={5}>
                      <div className='md:mt-20'>                        
-                           <GirlShopping className='ml-20 md:h-xl'/>
+                           <GirlShopping className='ml-32 h-64 md:ml-20 md:h-xl'/>
                     </div>
                  </Grid>
              </Grid>
