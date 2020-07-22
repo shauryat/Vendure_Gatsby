@@ -12,12 +12,14 @@ const SearchPage = ({location}) => {
     })
 
     if (loading ) return <p> loading... </p>
-    if (error ) return <p> error... </p>
+    if (error ) return <p> {error.message} </p>
     return (
         <Layout>
         <div className={styles.productList}>
+            
             { data ? data.search.items.map(item => <GalaxyCardDemo product={item} key={item.productId}/>): <p>no results </p> }
         </div>
+        <p> search results for{location.state.term}</p>
         </Layout>
     );
 };

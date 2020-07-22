@@ -24,11 +24,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
     marker:{
       width:40,
-      height:6,
+      height:3,
       marginTop:5,
       position:'absolute',
       backgroundColor:'#1778F2',
-      marginLeft:5
+      marginLeft:4
       
     }
 
@@ -41,14 +41,17 @@ const classes = useStyles()
     <SEO title='Home' keywords={[`gatsby`, `application`, `react`]} />
     <LandingComponent/>
     
-    <section className='md:ml-32 mt-4'>
-       {/* <Typography variant="h3" > COLLECTIONS</Typography>
-    <span className={classes.marker}/> */}
+    <section className='md:ml-2 mt-4'>
+        <Typography variant="h4" color='secondary'> COLLECTIONS</Typography>
+    <span className={classes.marker}/> 
     <br/>
       <div className={classes.root}>
       { data.vendure.collections.items.filter((collection:any) => collection.parent && collection.parent.name === '__root_collection__')
       .map(item => <GalaxyCollection collection={item} key={item.id} />) }
       </div>
+      <br/>
+      <Typography variant="h4" color='secondary'> BEST SELLERS</Typography>
+      <span className={classes.marker}/>
       <br/>
       <div className='-ml-32'>
       <LandingProduct/>

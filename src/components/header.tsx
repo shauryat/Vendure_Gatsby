@@ -66,8 +66,8 @@ const Header = (props) => {
         <Toolbar>
         <div style={{flexGrow:1}} >
           <Link to="/">
-               <div className='text-white text-xs md:text-lg leading-none font-semibold'> VENDURE </div>
-               <div className='text-xs text-white' > STORE </div>
+               <div className='text-facebookBlue text-xs md:text-lg leading-none font-semibold'> VENDURE </div>
+               <div className='text-xs text-facebookBlue' > STORE </div>
                </Link>
             </div>
             <CustomerDisplayInfo/>

@@ -23,11 +23,11 @@ createStyles({
 const LandingComponent = () => {
     const classes = useStyles()
     return (
-        <div className='bg-facebookBlue mt-4 rounded-lg'>
+        <div className='bg-white mt-4 rounded-lg'>
         <div style={{height:'290' , width:'100%'}}>
              <Grid container spacing={3}>
              <Grid item xs={12} md={7}>
-                     <div className='mx-4 mt-16 md:mt-32 md:ml-32 md:mr-24 mb-4'>
+                     <div className='mx-4 mt-16 md:mt-24 md:ml-32 md:mr-24 mb-4'>
                      <Typography  className={classes.typhography}  variant="h2" display='block' color="secondary">Gatsby Vendure </Typography>
                      <Typography  variant="h5" display='block' color="secondary">E-commerce Starter 🎉 </Typography>
                      <br/>
@@ -42,7 +42,7 @@ const LandingComponent = () => {
                      </div>
                  </Grid>
                  <Grid item xs={12} md={5}>
-                     <div className='md:mt-20'>                        
+                     <div className='md:mt-12'>                        
                            <GirlShopping className='ml-32 h-64 md:ml-20 md:h-xl'/>
                     </div>
                  </Grid>

@@ -3,8 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 
-import { IconButton , Badge} from '@material-ui/core';
+import { IconButton , Badge, Typography, Card, Button} from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { createStyles, fade, Theme, makeStyles } from '@material-ui/core/styles';
 
 import { formatPrice } from '../../utilities/utilities';
 
@@ -12,7 +13,24 @@ import styles from './ShoppingCart.module.scss';
 import { ADJUST_ITEM_QUANTITY, GET_ACTIVE_ORDER } from "./ShoppingCart.vendure";
 import { Link } from "gatsby"
 
+import AddIcon from '@material-ui/icons/Add';
+
+
+const useStyles = makeStyles((theme:Theme) =>
+createStyles({
+  card:{
+    marginBottom:12,
+    marginRight:4,
+    borderRadius:6
+  },
+  button:{
+    boxShadow:theme.shadows[0],
+    borderRadius:7
+  }
+}))
+
 export function ShoppingCart() {
+  const classes = useStyles();
   const { data, error, loading } = useQuery(GET_ACTIVE_ORDER, {pollInterval:500});
   const [opened, setOpened] = useState(false);
   const [adjustItemQuantity] = useMutation(ADJUST_ITEM_QUANTITY);
@@ -40,7 +58,8 @@ export function ShoppingCart() {
                 .join(' ')}
         >
           <button className="delete" onClick={() => setOpened(false)} />
-          <h3 className="title is-3">Cart</h3>
+          <Typography variant="h3" color="secondary">Cart</Typography>
+          <br/>
           {data.activeOrder === null ? (
               <div>Empty!</div>
           ): (
@@ -53,7 +72,12 @@ export function ShoppingCart() {
                       })
                   }
               />
-                <Link className="button is-primary" to="/checkout">Checkout</Link>
+                
+                <br/>
+                  <Button variant='contained' color='secondary' fullWidth='true' className={classes.button}>
+                  Checkout
+                  </Button>
+                  
               </>
           )  }
         </div>
@@ -72,7 +96,6 @@ export function CartContentsList({ order, adjustQuantity }: { order: any, adjust
             />
         ))}
         <div className={styles.totalRow}>
-          <span>Total:</span>
           <span>{formatPrice(order.currencyCode, order.total)}</span>
         </div>
       </div>
@@ -80,10 +103,12 @@ export function CartContentsList({ order, adjustQuantity }: { order: any, adjust
 }
 
 function CartContentsRow({ line, adjustQuantity }: { line: any, adjustQuantity?: Function }) {
+  const classes = useStyles();
   return (
+    <Card variant='outlined' className={classes.card}>
       <div className={styles.cartRow}>
         <div className={styles.rowImage}>
-          <img src={`${line.featuredAsset.preview}?preset=tiny`} />
+          <img src={`${line.featuredAsset.preview}?w=70&h=78&mode=crop`} />
         </div>
         <div className={styles.rowDetail}>
           <div>{line.productVariant.name}</div>
@@ -92,18 +117,19 @@ function CartContentsRow({ line, adjustQuantity }: { line: any, adjustQuantity?:
                 className={styles.adjustQuantity}
                 onClick={() => adjustQuantity(line.id, line.quantity - 1)}
             >
-                <FontAwesomeIcon icon={faMinus} color="#999"/>
+                <FontAwesomeIcon icon={faMinus} color="#1778F2"/>
             </button>}
             {line.quantity}
             {adjustQuantity && <button
                 className={styles.adjustQuantity}
                 onClick={() => adjustQuantity(line.id, line.quantity + 1)}
             >
-              <FontAwesomeIcon icon={faPlus} color="#999"/>
+              <FontAwesomeIcon icon={faPlus} color="#1778F2"/>
             </button>}
             <div className={styles.rowTotal}>{formatPrice(line.productVariant.currencyCode, line.totalPrice)}</div>
           </div>
         </div>
       </div>
+      </Card>
   );
 }

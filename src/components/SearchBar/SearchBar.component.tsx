@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik,Field  } from 'formik';
 import { navigate } from 'gatsby';
 import { TextField } from '@material-ui/core';
-import InputBase from '@material-ui/core/InputBase';
+import { InputBase } from 'formik-material-ui';
 import { createStyles, fade, Theme, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -11,9 +11,9 @@ const useStyles = makeStyles((theme: Theme) =>
     search: {
       position: 'relative',
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
+      backgroundColor: fade(theme.palette.common.black, 0.15),
       '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.25),
+        backgroundColor: fade(theme.palette.common.black, 0.25),
       },
       marginLeft: 5,
       width: 'auto',
@@ -62,9 +62,12 @@ const SearchBarComponent = () => {
              onSubmit={({term}) => {navigate( "/SearchPage", { state:{ term } })}} >
              {({
           values,
+          errors,
+          touched,
           handleChange,
           handleBlur,
-          handleSubmit,
+          handleSubmit
+          
             /* and other goodies */
         }) => (  <form onSubmit={handleSubmit}>
 
@@ -73,20 +76,20 @@ const SearchBarComponent = () => {
               <SearchIcon />
             </div>
     <Field
-      type="text"
       name="term"
-      component={InputBase}
       placeholder="Search…"
+      component={InputBase}
       classes={{
         root: classes.inputRoot,
         input: classes.inputInput,
       }}
+      
     />
   </div>
 
 {/* <button className="button is-primary" type="submit">
               Search
-            </button> */}
+            </button>  */}
            
 </form>
         )}
