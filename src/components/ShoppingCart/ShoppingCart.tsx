@@ -11,7 +11,7 @@ import { formatPrice } from '../../utilities/utilities';
 
 import styles from './ShoppingCart.module.scss';
 import { ADJUST_ITEM_QUANTITY, GET_ACTIVE_ORDER } from "./ShoppingCart.vendure";
-import { Link } from "gatsby"
+import Link from '../MatLink';
 
 import AddIcon from '@material-ui/icons/Add';
 
@@ -74,9 +74,11 @@ export function ShoppingCart() {
               />
                 
                 <br/>
-                  <Button variant='contained' color='secondary' fullWidth='true' className={classes.button}>
+                <Link to="/checkout">
+                  <Button variant='contained' color='secondary' fullWidth className={classes.button}>
                   Checkout
                   </Button>
+                  </Link>
                   
               </>
           )  }

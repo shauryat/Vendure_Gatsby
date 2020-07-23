@@ -32,6 +32,7 @@ const CheckoutPage = () => {
     if (data.activeOrder && data.activeOrder.state === 'ArrangingPayment') {
       setStage(2);
     }
+    
   }, [LastData,data]);
   if (ProcessLoading) {
     return <div>Loading...</div>;
@@ -60,27 +61,13 @@ const CheckoutPage = () => {
     },
   ];
   return (
-    <Layout>
-      <div className="columns">
-        <div className="column is-three-quarters">
-          <div className={styles.checkoutStageIndicator}>
-            <ol>
-              {stages.map((stage, index) => (
-                <li
-                  key={stage.name}
-                  className={
-                    index === currentStage ? styles.active : ''
-                  }
-                >
-                  {stage.name}
-                </li>
-              ))}
-            </ol>
-          </div>
+  <Layout>
+    <div className='mt-32'>
+      <div>
           {stages[currentStage].render()}
-         </div>
       </div>
-    </Layout>
+    </div>
+   </Layout>
   );
 };
 

@@ -13,6 +13,7 @@ import {
 } from '@mui-treasury/components/info';
 import { useGalaxyInfoStyles } from '@mui-treasury/styles/info/galaxy';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
+import { Link } from 'gatsby';
 
 import { formatPrice } from '../../utilities/utilities';
 
@@ -73,6 +74,7 @@ export const GalaxyCardDemo = ({product}) => {
           ]}
         />
       </NoSsr>
+   <Link to={'/products/' + product.slug}>   
       <Card className={styles.card}>
         <CardMedia
           classes={mediaStyles}
@@ -86,6 +88,7 @@ export const GalaxyCardDemo = ({product}) => {
           </Info>
         </Box>
       </Card>
+      </Link>
     </>
   );
 };

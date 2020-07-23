@@ -1,16 +1,50 @@
-import { Formik } from 'formik';
+import { Formik , Field } from 'formik';
 import React from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-
+import { TextField } from 'formik-material-ui';
 import { OrderAddress } from '../../../vendure-types';
+import { Typography } from '@material-ui/core';
 import {
   ADD_ADDRESS_TO_ORDER,
   GET_ACTIVE_ORDER_FOR_CHECKOUT,
   TRANSITION_TO_ARRANGING_PAYMENT,
 } from '../../pages/checkout.vendure';
 import { CountrySelect } from '../CountrySelect/CountrySelect';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import LocalShippingOutlinedIcon from '@material-ui/icons/LocalShipping';
+
+const useStyles = makeStyles((theme) => ({
+  layout: {
+    width: 'auto',
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
+      width: 600,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
+  },
+  paper: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    padding: theme.spacing(2),
+    borderRadius:18,
+    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(6),
+      padding: theme.spacing(3),
+    },
+  },
+  button: {
+    boxShadow:theme.shadows[0]
+  }
+}));
 
 export function ShippingStage({ nextStage }) {
+  const classes = useStyles();
   const { data, loading, error } = useQuery(GET_ACTIVE_ORDER_FOR_CHECKOUT, {
     fetchPolicy: 'network-only',
   });
@@ -55,125 +89,135 @@ export function ShippingStage({ nextStage }) {
           /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit}>
-            <div className="field">
-              <label className="label">Full name</label>
-              <div className="control">
-                <input
-                  className="input"
+            <main className={classes.layout}>
+              <Paper className={classes.paper} variant="outlined">
+                <LocalShippingOutlinedIcon color="secondary"/>
+                 <Typography variant="h4" color="secondary" gutterBottom>Shipping Address</Typography>
+                 <Grid container spacing={3}>
+                    <Grid item xs={12} sm={6}>
+                <Field
                   type="text"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
                   name="fullName"
                   value={values.fullName}
+                  component={TextField}
+                  variant="outlined"
+                  color="secondary"
+                  label='Full Name'
+                  fullWidth
                 />
-              </div>
-            </div>
-            <div className="field">
-              <label className="label">Company</label>
-              <div className="control">
-                <input
-                  className="input"
+              </Grid>
+            
+              <Grid item xs={12} sm={6}>
+                <Field
                   type="text"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="company"
+                   name="company"
                   value={values.company}
+                  component={TextField}
+                  variant="outlined"
+                  color="secondary"
+                  label='Company'
+                  fullWidth
                 />
-              </div>
-            </div>
-            <div className="field">
-              <label className="label">Street line 1</label>
-              <div className="control">
-                <input
-                  className="input"
+              </Grid>
+             
+              <Grid item xs={12}>
+                <Field
                   type="text"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="streetLine1"
+                   name="streetLine1"
                   value={values.streetLine1}
+                  component={TextField}
+                  variant="outlined"
+                  color="secondary"
+                  label='Address Line 1'
+                  fullWidth
                 />
-              </div>
-            </div>
-            <div className="field">
-              <label className="label">Street line 2</label>
-              <div className="control">
-                <input
-                  className="input"
+              </Grid>
+            
+              <Grid item xs={12}>
+                <Field
                   type="text"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="streetLine2"
+                   name="streetLine2"
                   value={values.streetLine2}
+                  component={TextField}
+                  variant="outlined"
+                  color="secondary"
+                  label='Address Line 2'
+                  fullWidth
                 />
-              </div>
-            </div>
-            <div className="field">
-              <label className="label">City</label>
-              <div className="control">
-                <input
-                  className="input"
+              </Grid>
+            
+              <Grid item xs={12} sm={6}>
+                <Field
                   type="text"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="city"
+                   name="city"
                   value={values.city}
+                  component={TextField}
+                  variant="outlined"
+                  color="secondary"
+                  label='City'
+                  fullWidth
                 />
-              </div>
-            </div>
-            <div className="field">
-              <label className="label">Province</label>
-              <div className="control">
-                <input
-                  className="input"
+              </Grid>
+            
+              <Grid item xs={12} sm={6}>
+                <Field
                   type="text"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="province"
+                   name="province"
                   value={values.province}
+                  component={TextField}
+                  variant="outlined"
+                  color="secondary"
+                  label='Province'
+                  fullWidth
                 />
-              </div>
-            </div>
-            <div className="field">
-              <label className="label">Postal code</label>
-              <div className="control">
-                <input
-                  className="input"
+              </Grid>
+            
+              <Grid item xs={12} sm={6}>
+                <Field
                   type="text"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="postalCode"
+                   name="postalCode"
                   value={values.postalCode}
+                  component={TextField}
+                  variant="outlined"
+                  color="secondary"
+                  label='Postal Code'
+                  fullWidth
                 />
-              </div>
-            </div>
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                  <Field
+                  type="text"
+                   name="phoneNumber"
+                  value={values.phoneNumber}
+                  component={TextField}
+                  variant="outlined"
+                  color="secondary"
+                  label='Phone Number'
+                  fullWidth
+                />
+                </Grid>
+              
+           <div className="ml-2 mb-4">   
             <div className="field">
               <label className="label">Country</label>
               <div className="control">
                 <CountrySelect
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="countryCode"
+                   onChange={handleChange}
+                   onBlur={handleBlur}
+                   name="countryCode"
                   value={values.countryCode}
                 />
-              </div>
-            </div>
-            <div className="field">
-              <label className="label">Phone number</label>
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="phoneNumber"
-                  value={values.phoneNumber}
-                />
-              </div>
-            </div>
+                </div>
+            </div>    
+          </div>            
 
-            <button className="button is-primary" type="submit">
+            <Button variant="contained" fullWidth type="submit" color="secondary" className={classes.button}>
               Proceed to payment
-            </button>
+            </Button>
+            </Grid>
+            </Paper>
+            </main>
           </form>
         )}
       </Formik>

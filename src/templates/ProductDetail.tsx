@@ -34,12 +34,13 @@ export default ({ data }) => {
   const [setActiveOrderId] = useMutation(SET_ACTIVE_ORDER_ID);
   return (
     <Layout>
+      <br/><br/><br/>
       <div className="columns">
         <figure className="column">
           <img src={product.featuredAsset.preview + '?preset=medium'} />
         </figure>
         <div className="column">
-          <h1 className="title is-1">{product.name}</h1>
+          <h1 className="text-5xl font-semibold text-facebookBlue">{product.name}</h1>
 
           <div
             className={styles.description}

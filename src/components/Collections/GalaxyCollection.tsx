@@ -13,6 +13,8 @@ import {
 } from '@mui-treasury/components/info';
 import { useGalaxyInfoStyles } from '@mui-treasury/styles/info/galaxy';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
+import { Link } from 'gatsby';
+
 
 
 const useStyles = makeStyles(() => ({
@@ -21,7 +23,7 @@ const useStyles = makeStyles(() => ({
     boxShadow: 'none',
     position: 'relative',
     minWidth: 280,
-    minHeight: 375,
+    minHeight: 425,
     marginRight:10,
     marginBottom:12,
     '&:after': {
@@ -64,6 +66,7 @@ export const GalaxyCollection = ({collection}) => {
           ]}
         />
       </NoSsr>
+      <Link to={'/collections/' + collection.slug}>   
       <Card className={styles.card}>
         <CardMedia
           classes={mediaStyles}
@@ -76,6 +79,7 @@ export const GalaxyCollection = ({collection}) => {
           </Info>
         </Box>
       </Card>
+      </Link>
     </>
   );
 };
