@@ -46,7 +46,7 @@
     "@types/react": "^16.8.8",
     "gatsby-plugin-sass": "^2.0.11",
     "gatsby-source-graphql": "^2.0.14",
-    "node-sass": "^4.11.0",
+    "node-sass": "^7.0.0",
     "prettier": "^1.16.4",
     "tslint": "^5.14.0",
     "typescript": "^3.3.3333"
